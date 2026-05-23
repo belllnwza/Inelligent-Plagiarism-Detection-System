@@ -1,0 +1,232 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff8e7;
+}
+
+header {
+  padding: 10px 20px;
+  background-color: #f3e5ff;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* เพิ่มสไตล์สำหรับโลโก้ใหม่ */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.main-logo {
+  height: 40px; /* ปรับความสูงตามความเหมาะสมของ Header ค่ะ */
+  width: auto;  /* ให้ความกว้างปรับตามสัดส่วนภาพอัตโนมัติ */
+  display: block;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.nav-buttons button:hover { background-color: #f0e0ff; transform: scale(1.05);}
+.nav-buttons button:active { transform: scale(0.97); }
+
+.header-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+  gap: 10px;
+}
+
+.status-text { font-size: 14px; color: #555; }
+.lang-btn { font-weight: bold; cursor: pointer; }
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+}
+
+.login-box {
+  background-color: white;
+  border: 2px solid #d8b4fe;
+  border-radius: 12px;
+  padding: 60px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+.login-box h2 { margin-bottom: 25px; font-size: 22px; }
+
+/* คอนเทนเนอร์วงกลม */
+.profile-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #b084ff;
+  background-color: #fff;
+  margin: 0 auto 20px;
+  overflow: hidden;
+
+  /* ใช้ Flexbox จัดการทุกอย่างให้อยู่กลาง */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ปรับแต่ง SVG (ไอคอนคน) */
+.avatar-placeholder {
+  width: 55%; /* ปรับขนาดตามความเหมาะสม */
+  height: 55%;
+  stroke: #b084ff;
+  display: block;
+  /* ลบ position: absolute ออกให้หมด */
+}
+
+/* ปรับแต่งรูปภาพ (ถ้ามี) */
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+/* แสดงรูปภาพและซ่อนไอคอนเมื่อมีคลาส has-image */
+.profile-circle.has-image .avatar-image {
+  display: block;
+}
+.profile-circle.has-image .avatar-placeholder {
+  display: none;
+}
+/* Inputs */
+.input-wrapper { position: relative; margin-bottom: 10px; width: 100%; }
+
+input {
+  width: 100%;
+  padding: 14px 45px 14px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-password svg { width: 100%; height: 100%; stroke: #555; }
+
+/* Hide browser built-in password reveal button (Edge / Chrome on Windows) */
+input::-ms-reveal {
+  display: none !important;
+}
+input::-ms-clear {
+  display: none !important;
+}
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-textfield-decoration-container {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 14px;
+  color: #f87171;
+  text-decoration: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.forgot:active { transform: scale(0.95); }
+
+button.login-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  background-color: #f3e5ff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button.login-btn:hover { background-color: #e0cfff; transform: scale(1.03); }
+/* --- Mobile Responsive --- */
+@media (max-width: 600px) {
+  header {
+    padding: 10px 15px;
+  }
+
+  .header-top {
+    flex-direction: column; 
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .nav-buttons {
+    width: 100%;
+    justify-content: space-between; 
+    gap: 5px;
+  }
+
+  .nav-buttons button {
+    padding: 10px 12px;
+    font-size: 14px; 
+    flex: 1;
+    justify-content: center;
+  }
+
+  .header-bottom {
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .login-container {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .login-box {
+    width: 100%; 
+    max-width: 350px;
+    padding: 40px 25px; 
+  }
+
+  .main-logo {
+    height: 35px;
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result Summation</title>
+  <link rel="stylesheet" href="../CSS/style4.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="header-top">
+      <div class="logo">
+        <img src="../Img/width_4.png" alt="AI Homechecker Logo" class="main-logo">
+      </div>
+      <div class="nav-buttons">
+        <button class="home-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-6v-7H10v7H4a1 1 0 0 1-1-1V9.5z" />
+          </svg>
+          Home
+        </button>
+        <button class="desc-btn">Description</button>
+        <button class="logout-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          Log-Out
+        </button>
+      </div>
+    </div>
+    <div class="header-bottom">
+      <span class="status-text">Ready to inspect work...</span>
+      <button class="lang-btn" id="lang-btn">EN/TH</button>
+    </div>
+  </header>
+
+  <div class="history-container">
+    <h2 id="history-title">Result Summation...</h2>
+    <div id="history-list"></div>
+
+    <div class="description-section">
+      <p id="desc-title"><strong>Description</strong></p>
+      <ul id="desc-list">
+        <li data-en="Must put the correct answer file." data-th="ต้องใส่ไฟล์คำตอบที่ถูกต้อง">Must put the correct answer
+          file.</li>
+        <li data-en="Up to 10 answer files can be uploaded for review at a time."
+          data-th="สามารถอัปโหลดไฟล์ตรวจสอบได้สูงสุด 10 ไฟล์ต่อครั้ง">Up to 10 answer files can be uploaded for review
+          at a time.</li>
+        <li data-en="Green indicates accuracy of 80% or higher." data-th="สีเขียว หมายถึงคะแนน 80% ขึ้นไป"><span
+            class="accuracy high">Green</span> indicates accuracy of 80% or higher.</li>
+        <li data-en="Yellow indicates accuracy between 50%-79%." data-th="สีเหลือง หมายถึงคะแนน 50%-79%"><span
+            class="accuracy medium">Yellow</span> indicates accuracy between 50%-79%.</li>
+        <li data-en="Red indicates accuracy of 49% or lower." data-th="สีแดง หมายถึงคะแนนต่ำกว่า 50%"><span
+            class="accuracy low">Red</span> indicates accuracy of 49% or lower.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../JS/script4.js"></script>
+</body>
+
+</html>

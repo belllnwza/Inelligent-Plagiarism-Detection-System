@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff8e7;
+}
+
+/* Header */
+header { padding: 10px 20px; background-color: #f3e5ff; }
+.header-top { display:flex; justify-content:space-between; align-items:center; }
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.main-logo {
+  height: 40px; 
+  width: auto;  
+  display: block;
+}
+.nav-buttons { display:flex; gap:8px; }
+.nav-buttons button { display:flex; align-items:center; gap:6px; border:none; padding:12px 20px; border-radius:12px; background:white; font-weight:bold; font-size:16px; cursor:pointer; transition:0.2s; }
+.nav-buttons button:hover { background:#f0e0ff; transform:scale(1.05); }
+.nav-buttons button:active { transform:scale(0.97); }
+
+.header-bottom { display:flex; justify-content:flex-end; margin-top:5px; gap:10px; }
+.status-text { font-size:14px; color:#555; }
+.lang-btn { font-weight:bold; cursor:pointer; }
+
+/* Result Summation */
+.history-container { max-width:700px; margin:20px auto; padding:20px; }
+.history-container h2 { font-weight:bold; font-size:16px; color:#555; margin-bottom:20px; }
+
+/* History Item */
+.history-item {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+  margin-bottom:12px;
+  border-radius:12px;
+  background:linear-gradient(145deg,#fff8e7,#fef2ff);
+  border:1px solid #e0cfff;
+  box-shadow:0 4px 8px rgba(176,132,255,0.2);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.history-item:hover {
+  transform: scale(1.02);
+  background:linear-gradient(145deg,#fef2ff,#fff8e7);
+  box-shadow:0 6px 12px rgba(176,132,255,0.3);
+}
+.history-item:active {
+  transform: scale(0.98);
+  box-shadow:0 3px 6px rgba(176,132,255,0.2);
+}
+.history-item.selected {
+  border-color:#8e44ad;
+  background:#f5e6ff;
+}
+
+/* File Info */
+.file-info { display:flex; align-items:center; gap:12px; flex-grow:1; }
+.file-icon { width:40px; height:40px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:2px solid #8e44ad; border-radius:8px; padding:4px; cursor:pointer; transition:all 0.2s ease; }
+.file-icon:hover { background-color:#f5e6ff; transform:scale(1.1); border-color:#9b59b6; }
+.file-icon:active { transform:scale(0.95); border-color:#7d3c98; }
+.file-name { font-weight:500; color:#4b2fa3; text-align:left; }
+
+/* Accuracy Box */
+.accuracy { font-weight:bold; padding:4px 10px; border-radius:12px; min-width:120px; text-align:center; display:inline-block; }
+.accuracy.high { background:#a1ff84; color:#000; border:1px solid #a1ff84; }
+.accuracy.medium { background:#ffe37d; color:#000; border:1px solid #ffe37d; }
+.accuracy.low { background:#ff7d7d; color:#000; border:1px solid #ff7d7d; }
+
+/* Description */
+.description-section { margin-top:20px; }
+.description-section ul { padding-left:20px; }
+.description-section li { margin-bottom:6px; font-size:14px; text-align:left; }
+.description-section .accuracy { padding:2px 8px; border-radius:6px; display:inline-block; }
+
+/* --- Mobile Responsive สำหรับหน้า Result Summation --- */
+@media (max-width: 600px) {
+  header {
+    padding: 10px 15px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .nav-buttons {
+    width: 100%;
+    justify-content: space-between;
+    gap: 5px;
+  }
+
+  .nav-buttons button {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  .header-bottom {
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .history-container {
+    width: 95%;
+    padding: 20px 10px;
+    margin: 15px auto;
+  }
+
+  /* ปรับรายการผลลัพธ์ให้เหมาะสมกับหน้าจอแคบ */
+  .history-item {
+    flex-direction: column; /* เปลี่ยนจากแถวเป็นแนวตั้ง */
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .file-info {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .file-name {
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-all; /* ป้องกันชื่อไฟล์ยาวๆ ทะลุขอบ */
+    white-space: normal;
+  }
+
+  /* ปรับแต่งส่วนแสดงคะแนนความถูกต้อง */
+  .accuracy-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+  }
+
+  .accuracy-label {
+    font-size: 13px;
+  }
+
+  .accuracy-percent {
+    font-size: 18px; /* เน้นตัวเลขคะแนนให้ชัดเจน */
+  }
+
+  /* ปรับส่วนคำอธิบาย (Description) */
+  .description-section {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+}
