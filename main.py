@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, RedirectResponse
@@ -8,8 +8,21 @@ from datetime import datetime
 from pymongo import MongoClient
 
 import os
+import io
+import pdfplumber
 
 from ai_engine import calculate_similarity
+
+def extract_text_from_file(file_bytes: bytes, filename: str) -> str:
+    """Extract text from uploaded file. Supports .txt and .pdf"""
+    ext = os.path.splitext(filename)[1].lower()
+    if ext == '.pdf':
+        with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+            pages_text = [page.extract_text() or '' for page in pdf.pages]
+            return '\n'.join(pages_text)
+    else:
+        # Default: treat as plain text
+        return file_bytes.decode('utf-8')
 
 app = FastAPI()
 
@@ -60,10 +73,15 @@ class ResetPasswordRequest(BaseModel):
 @app.post("/check-students")
 async def check_students(
     master_file: UploadFile = File(...),      
-    other_files: List[UploadFile] = File(...)
+    other_files: List[UploadFile] = File(...),
+    username: str = Form(None),
+    username_query: str = Query(None, alias="username")
 ):
+    resolved_username = username or username_query
+    print(f"DEBUG: check_students called with username='{resolved_username}', type={type(resolved_username)}")
     try:
-        master_content = (await master_file.read()).decode("utf-8")
+        master_bytes = await master_file.read()
+        master_content = extract_text_from_file(master_bytes, master_file.filename)
     except Exception as e:
         return {"status": "error", "message": f"Failed to read master file: {str(e)}"}
 
@@ -71,7 +89,8 @@ async def check_students(
     filenames = []
     for file in other_files:
         try:
-            content = (await file.read()).decode("utf-8")
+            file_bytes = await file.read()
+            content = extract_text_from_file(file_bytes, file.filename)
             others_content.append(content)
             filenames.append(file.filename)
         except Exception as e:
@@ -84,6 +103,7 @@ async def check_students(
     report = calculate_similarity(master_content, others_content, filenames)
 
     history_data = {
+        "username": resolved_username,
         "check_time": datetime.now(),
         "master_filename": master_file.filename,
         "results": report 
@@ -107,17 +127,37 @@ async def check_students(
 
 # Get API for fetching past check histories
 @app.get("/api/history")
-async def get_history():
+async def get_history(username: str = None):
+    print(f"DEBUG: get_history called with username='{username}'")
     records = []
+    
+    # Normalize empty or null/undefined strings
+    is_guest = username in [None, "", "null", "undefined", "Teacher"]
+
     if mongo_available:
         try:
-            cursor = history_collection.find().sort("check_time", -1).limit(50)
+            if is_guest:
+                query = {
+                    "$or": [
+                        {"username": {"$in": [None, "", "null", "undefined", "Teacher"]}},
+                        {"username": {"$exists": False}}
+                    ]
+                }
+            else:
+                query = {"username": username}
+            cursor = history_collection.find(query).sort("check_time", -1).limit(50)
             records = list(cursor)
         except Exception as e:
             print(f"Failed to query MongoDB history: {e}")
-            records = db_fallback
+            if is_guest:
+                records = [r for r in db_fallback if r.get("username") in [None, "", "null", "undefined", "Teacher"]]
+            else:
+                records = [r for r in db_fallback if r.get("username") == username]
     else:
-        records = db_fallback
+        if is_guest:
+            records = [r for r in db_fallback if r.get("username") in [None, "", "null", "undefined", "Teacher"]]
+        else:
+            records = [r for r in db_fallback if r.get("username") == username]
 
     formatted_records = []
     for r in records:

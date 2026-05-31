@@ -1,3 +1,4 @@
+const API_BASE = 'http://localhost:8080';
 let isThai = false;
 const langBtn = document.getElementById('lang-btn');
 const correctFileText = document.getElementById('correct-file-text');
@@ -28,6 +29,8 @@ document.querySelector('.desc-btn').addEventListener('click', () => {
 
 document.querySelector('.logout-btn').addEventListener('click', () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('check_results');
+  localStorage.removeItem('compared_with');
   window.location.href = 'login1.html';
 });
 
@@ -177,14 +180,14 @@ calculateBtn.addEventListener('click', async () => {
   statusText.textContent = isThai ? "กำลังคำนวณผลลัพธ์ด้วย Machine Learning..." : "Calculating results using Machine Learning...";
 
   const formData = new FormData();
+  formData.append('username', username);
   formData.append('master_file', selectedMasterFile);
   selectedStudentFiles.forEach(file => {
     formData.append('other_files', file);
   });
 
   try {
-    // API call to FastAPI running locally (relative url or absolute http://localhost:8000 depending on environment)
-    const response = await fetch('/check-students', {
+    const response = await fetch(`${API_BASE}/check-students?username=${encodeURIComponent(username)}`, {
       method: 'POST',
       body: formData
     });

@@ -1,3 +1,4 @@
+const API_BASE = 'http://localhost:8080';
 // ---------------- Language toggle ----------------
 let isThai = false;
 const historyLabels = { en: "History...", th: "ประวัติการตรวจสอบ..." };
@@ -15,6 +16,8 @@ document.querySelector('.desc-btn').addEventListener('click', () => {
 
 document.querySelector('.logout-btn').addEventListener('click', () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('check_results');
+  localStorage.removeItem('compared_with');
   window.location.href = 'login1.html';
 });
 
@@ -51,7 +54,7 @@ async function fetchAndRenderHistory() {
   list.querySelectorAll('.history-item:not(.template)').forEach(e => e.remove());
 
   try {
-    const response = await fetch('/api/history');
+    const response = await fetch(`${API_BASE}/api/history?username=${encodeURIComponent(username)}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

@@ -13,6 +13,8 @@ document.querySelector('.desc-btn').addEventListener('click', () => {
 
 document.querySelector('.logout-btn').addEventListener('click', () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('check_results');
+  localStorage.removeItem('compared_with');
   window.location.href = 'login1.html';
 });
 
