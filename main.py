@@ -78,7 +78,6 @@ async def check_students(
     username_query: str = Query(None, alias="username")
 ):
     resolved_username = username or username_query
-    print(f"DEBUG: check_students called with username='{resolved_username}', type={type(resolved_username)}")
     try:
         master_bytes = await master_file.read()
         master_content = extract_text_from_file(master_bytes, master_file.filename)
@@ -128,7 +127,6 @@ async def check_students(
 # Get API for fetching past check histories
 @app.get("/api/history")
 async def get_history(username: str = None):
-    print(f"DEBUG: get_history called with username='{username}'")
     records = []
     
     # Normalize empty or null/undefined strings

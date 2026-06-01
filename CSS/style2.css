@@ -288,15 +288,6 @@ header {
 .landing-page { background:#f5e6ff; text-align:center; padding: 80px 20px; }
 .landing-page h1 { margin:0; font-size:32px; color:#4b2fa3; }
 
-.landing-page .landing-img {
-  width: 100%;
-  height: 240px;
-  border-radius: 10px;
-  display: block;
-  margin: 0 auto;
-  object-fit: contain;
-}
-
 /* Description */
 .description-section {
   max-width: 800px;

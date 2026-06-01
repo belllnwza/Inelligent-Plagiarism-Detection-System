@@ -32,18 +32,6 @@ function toggleLanguage() {
   fetchAndRenderHistory();
 }
 
-// ---------------- Profile avatar ----------------
-function changeProfile(src) {
-  const avatar = document.getElementById('profile-avatar');
-  const img = document.getElementById('profile-img');
-  if (src) { 
-    img.src = src; 
-    avatar.classList.add('has-image'); 
-  } else { 
-    img.src = ''; 
-    avatar.classList.remove('has-image'); 
-  }
-}
 
 // ---------------- Render history from backend ----------------
 async function fetchAndRenderHistory() {

@@ -3,7 +3,6 @@ let isThai = false;
 const langBtn = document.getElementById('lang-btn');
 const correctFileText = document.getElementById('correct-file-text');
 const calculateBtn = document.getElementById('calculate-btn');
-const landingTitle = document.getElementById('landing-title');
 const correctUploadBtn = document.getElementById('correct-answer-upload-btn');
 const masterFileInput = document.getElementById('master-file-input');
 const studentFileInput = document.getElementById('student-files-input');
@@ -72,7 +71,6 @@ langBtn.addEventListener('click', () => {
   }
 
   calculateBtn.textContent = isThai ? "คำนวณคำตอบ" : "Calculate the Answer";
-  landingTitle.textContent = isThai ? "หน้าแรก" : "Landing Page";
 
   document.querySelectorAll('#desc-list li').forEach(li => {
     const span = li.querySelector('span.accuracy');

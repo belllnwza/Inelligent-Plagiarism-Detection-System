@@ -1,6 +1,8 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.ensemble import RandomForestClassifier
+import json
+import os
 
 def get_jaccard_sim(str1, str2):
     a = set(str1.lower().split())
@@ -12,12 +14,16 @@ def get_jaccard_sim(str1, str2):
 
 def get_features(text_a, text_b, vectorizer=None):
     try:
-        # Fit vectorizer dynamically on the two texts to capture all vocabulary words
-        local_vectorizer = TfidfVectorizer().fit([text_a, text_b])
-        tfidf = local_vectorizer.transform([text_a, text_b])
+        # หากมีการส่ง vectorizer หลักเข้ามา ให้ใช้ตัวหลัก (ไม่งั้นค่า IDF จะเพี้ยน)
+        if vectorizer is not None:
+            tfidf = vectorizer.transform([text_a, text_b])
+        else:
+            # Fallback หากไม่มีการส่งมา (เช่น ตอนรันเทสเดี่ยวๆ)
+            local_vectorizer = TfidfVectorizer(stop_words='english').fit([text_a, text_b])
+            tfidf = local_vectorizer.transform([text_a, text_b])
+            
         cos_sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
     except Exception:
-        # Fallback if text is empty or has no words
         cos_sim = 0.0
 
     jaccard = get_jaccard_sim(text_a, text_b)
@@ -30,53 +36,22 @@ def get_features(text_a, text_b, vectorizer=None):
     return [cos_sim, jaccard, len_ratio]
 
 def train_classifier():
-    # A set of synthetic training pairs (master_text, student_text, label)
+    # โหลด training data จากไฟล์ภายนอก training_data.json
+    # ต้องการเพิ่มข้อมูล ให้แก้ที่ไฟล์ training_data.json ได้เลย ไม่ต้องแก้โค้ดนี้
+    data_path = os.path.join(os.path.dirname(__file__), "training_data.json")
+    with open(data_path, "r", encoding="utf-8") as f:
+        raw = json.load(f)
+
     # y=2: High Match, y=1: Partial Match, y=0: Low Match
-    training_data = [
-        # --- Class 2: High Match / Correct (Green) ---
-        ("Artificial intelligence is the simulation of human intelligence by machines.",
-         "Artificial intelligence is the simulation of human intelligence by machines.", 2),
-        ("Python is a high-level general-purpose programming language designed by Guido van Rossum.",
-         "Python is a high-level general-purpose programming language designed by Guido van Rossum.", 2),
-        ("Machine learning is a subfield of artificial intelligence that focuses on data.",
-         "Machine learning is a subfield of artificial intelligence that focuses on data.", 2),
-        ("Data science combines math, statistics, specialized programming, and analytics.",
-         "Data science combines mathematics, statistics, programming, and advanced analytics.", 2),
-        ("The quick brown fox jumps over the lazy dog.",
-         "The quick brown fox jumps over the lazy dog.", 2),
-        
-        # --- Class 1: Partial Match / Medium (Yellow) ---
-        ("Artificial intelligence is the simulation of human intelligence by machines.",
-         "AI is simulation of intelligence in machines using computer systems.", 1),
-        ("Python is a high-level general-purpose programming language designed by Guido van Rossum.",
-         "Python is a programming language developed by Guido van Rossum for general purposes.", 1),
-        ("Machine learning is a subfield of artificial intelligence that focuses on data.",
-         "Machine learning is a branch of AI focusing on data models.", 1),
-        ("Data science combines math, statistics, specialized programming, and analytics.",
-         "Data science uses mathematics and statistics for analytics and programming.", 1),
-        ("The quick brown fox jumps over the lazy dog.",
-         "A fast brown fox jumped over a sleepy dog.", 1),
-        
-        # --- Class 0: Low Match / Incorrect (Red) ---
-        ("Artificial intelligence is the simulation of human intelligence by machines.",
-         "The quick brown fox jumps over the lazy dog in the middle of the forest.", 0),
-        ("Python is a high-level general-purpose programming language designed by Guido van Rossum.",
-         "Web development involves designing websites and applications for the internet.", 0),
-        ("Machine learning is a subfield of artificial intelligence that focuses on data.",
-         "Cooking requires fresh ingredients, precise measurements, and proper heat control.", 0),
-        ("Data science combines math, statistics, specialized programming, and analytics.",
-         "Aerospace engineering is the primary field of engineering concerned with development of aircraft.", 0),
-        ("The quick brown fox jumps over the lazy dog.",
-         "I love eating apple pie and vanilla ice cream for dessert.", 0)
-    ]
+    training_data = [(d["text_a"], d["text_b"], d["label"]) for d in raw]
     
     # Fit the vectorizer on all texts in training data
     all_texts = []
     for t_a, t_b, _ in training_data:
         all_texts.extend([t_a, t_b])
         
-    vectorizer = TfidfVectorizer().fit(all_texts)
-    
+    # ใส่แค่ stop_words เพื่อกรองคำโหลภาษาอังกฤษออกอย่างปลอดภัย ไม่ให้ฟีเจอร์หาย
+    vectorizer = TfidfVectorizer(stop_words='english').fit(all_texts)
     X = []
     y = []
     for t_a, t_b, label in training_data:

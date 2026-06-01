@@ -60,17 +60,6 @@ function showMessage(msg, type) {
   el.style.color = type === 'success' ? '#065f46' : '#991b1b';
 }
 
-function togglePassword(inputId, iconId) {
-  const input = document.getElementById(inputId);
-  const eye = document.getElementById(iconId);
-  if (input.type === 'password') {
-    input.type = 'text';
-    eye.innerHTML = `<circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>`;
-  } else {
-    input.type = 'password';
-    eye.innerHTML = `<circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><line x1="1" y1="1" x2="23" y2="23"/>`;
-  }
-}
 
 function toggleLanguage() {
   isThai = !isThai;

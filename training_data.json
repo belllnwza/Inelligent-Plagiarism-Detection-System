@@ -1,0 +1,146 @@
+[
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "Artificial intelligence is the simulation of human intelligence by machines.",
+    "text_b": "Artificial intelligence is the simulation of human intelligence by machines."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "Python is a high-level general-purpose programming language designed by Guido van Rossum.",
+    "text_b": "Python is a high-level general-purpose programming language designed by Guido van Rossum."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "Machine learning is a subfield of artificial intelligence that focuses on data.",
+    "text_b": "Machine learning is a subfield of artificial intelligence that focuses on data."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "Data science combines math, statistics, specialized programming, and analytics.",
+    "text_b": "Data science combines mathematics, statistics, programming, and advanced analytics."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "The quick brown fox jumps over the lazy dog.",
+    "text_b": "The quick brown fox jumps over the lazy dog."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "Artificial intelligence is the simulation of human intelligence by machines.",
+    "text_b": "AI is simulation of intelligence in machines using computer systems."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "Python is a high-level general-purpose programming language designed by Guido van Rossum.",
+    "text_b": "Python is a programming language developed by Guido van Rossum for general purposes."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "Machine learning is a subfield of artificial intelligence that focuses on data.",
+    "text_b": "Machine learning is a branch of AI focusing on data models."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "Data science combines math, statistics, specialized programming, and analytics.",
+    "text_b": "Data science uses mathematics and statistics for analytics and programming."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "The quick brown fox jumps over the lazy dog.",
+    "text_b": "A fast brown fox jumped over a sleepy dog."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "Artificial intelligence is the simulation of human intelligence by machines.",
+    "text_b": "The quick brown fox jumps over the lazy dog in the middle of the forest."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "Python is a high-level general-purpose programming language designed by Guido van Rossum.",
+    "text_b": "Web development involves designing websites and applications for the internet."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "Machine learning is a subfield of artificial intelligence that focuses on data.",
+    "text_b": "Cooking requires fresh ingredients, precise measurements, and proper heat control."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "Data science combines math, statistics, specialized programming, and analytics.",
+    "text_b": "Aerospace engineering is the primary field of engineering concerned with development of aircraft."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "The quick brown fox jumps over the lazy dog.",
+    "text_b": "I love eating apple pie and vanilla ice cream for dessert."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "The student must submit homework before the deadline.",
+    "text_b": "Students are required to hand in assignments prior to the due date."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "A computer is a machine that can be programmed to carry out sequences of arithmetic or logical operations automatically.",
+    "text_b": "A computer is a machine that can automatically carry out programmed sequences of arithmetic or logical operations."
+  },
+  {
+    "label": 2,
+    "note": "Class 2: High Match (Green)",
+    "text_a": "Water boils at 100 degrees Celsius under standard atmospheric pressure.",
+    "text_b": "Under standard atmospheric pressure, the boiling point of water is 100 degrees Celsius."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "The student must submit homework before the deadline.",
+    "text_b": "Homework should be submitted by the student."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "A computer is a machine that can be programmed to carry out sequences of arithmetic or logical operations automatically.",
+    "text_b": "Computers are machines that do arithmetic and logical operations."
+  },
+  {
+    "label": 1,
+    "note": "Class 1: Partial Match (Yellow)",
+    "text_a": "Water boils at 100 degrees Celsius under standard atmospheric pressure.",
+    "text_b": "Water gets hot and boils at a certain temperature."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "The student must submit homework before the deadline.",
+    "text_b": "Football is the most popular sport in the world."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "A computer is a machine that can be programmed to carry out sequences of arithmetic or logical operations automatically.",
+    "text_b": "Mount Everest is the highest mountain on Earth."
+  },
+  {
+    "label": 0,
+    "note": "Class 0: Low Match (Red)",
+    "text_a": "Water boils at 100 degrees Celsius under standard atmospheric pressure.",
+    "text_b": "The Mona Lisa is a half-length portrait painting by Italian artist Leonardo da Vinci."
+  }
+]

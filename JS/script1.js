@@ -51,17 +51,6 @@ function showMessage(msg, type) {
   el.style.opacity = '1';
 }
 
-function togglePassword() {
-  const input = document.getElementById("password");
-  const eye = document.getElementById("eyeIcon");
-  if (input.type === "password") {
-    input.type = "text";
-    eye.innerHTML = `<circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>`;
-  } else {
-    input.type = "password";
-    eye.innerHTML = `<circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><line x1="1" y1="1" x2="23" y2="23"/>`;
-  }
-}
 
 function toggleLanguage() {
   isThai = !isThai;
@@ -95,16 +84,3 @@ document.getElementById('forgot-text').addEventListener('click', (e) => {
   e.preventDefault();
   window.location.href = 'forgot.html';
 });
-
-// Change profile from backend
-function changeProfile(src) {
-  const avatar = document.getElementById('profile-avatar');
-  const img = document.getElementById('profile-img');
-  if (src) {
-    img.src = src;
-    avatar.classList.add('has-image');
-  } else {
-    img.src = '';
-    avatar.classList.remove('has-image');
-  }
-}
